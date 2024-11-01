@@ -35,8 +35,8 @@ export async function POST(req: Request) {
     });
   } catch (error) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
-    return new Response(JSON.stringify({ error: 'Invalid request' }), { status: 400 });
-  }
+        console.error('Error processing request:', error);
+        return new Response(JSON.stringify({ error: 'Invalid request' }), { status: 400 });
+          }
 }
 
