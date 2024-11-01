@@ -53,6 +53,7 @@ export default function Page() {
 
       // Check if the updated score is 10000 and set the flag if it is
       if (data.score === 10000) {
+        setScore(10000);
         setFlag("FLAG{your_flag_here}"); // Replace with actual flag
       } else {
         setFlag(null); // Clear the flag if score is not 10000
