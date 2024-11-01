@@ -48,12 +48,11 @@ export default function Page() {
       const data = await response.json();
       console.log(data)
 
-      // Update the score cumulatively
-      setScore((prevScore) => prevScore + newScore);
+      // Update the score based on the response from the server
+      setScore(data.score);
 
       // Check if the updated score is 10000 and set the flag if it is
       if (data.score === 10000) {
-        setScore(10000);
         setFlag("FLAG{your_flag_here}"); // Replace with actual flag
       } else {
         setFlag(null); // Clear the flag if score is not 10000
@@ -85,7 +84,7 @@ export default function Page() {
           Increment by 15
         </button>
         <button onClick={() => updateScore(10000)} className="bg-blue-500 text-white px-4 py-2 rounded ml-2">
-          Increment by 
+          Set Score to 10000
         </button>
       </div>
       {flag && <p className="mt-4 text-green-600 font-bold">{flag}</p>} {/* Display flag if it exists */}
