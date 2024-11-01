@@ -10,6 +10,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { username, score } = await req.json();
     const expectedBinary = (1000).toString(2); // Binary representation of 1000
     const binaryCheck = score.toString(2); // Binary representation of score
