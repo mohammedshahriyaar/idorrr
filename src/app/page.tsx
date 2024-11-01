@@ -8,18 +8,7 @@ export default function Page() {
   const [flag, setFlag] = useState<string | null>(null); // State to hold the flag
 
   // Fetch the initial score from the server
-  useEffect(() => {
-    fetch('/api/score') // Fetch score from Next.js API route
-      .then((response) => response.json())
-      .then((data) => {
-        setScore(data.score);
-        // Check if the score is 10000 and set the flag if it is
-        if (data.score === 10000) {
-          setFlag("FLAG{your_flag_here}"); // Replace with actual flag
-        }
-      })
-      .catch((error) => console.error('Error fetching score:', error));
-  }, []);
+  
 
   // Define the type for the request body
   interface RequestBody {
@@ -48,8 +37,8 @@ export default function Page() {
       const data = await response.json();
       console.log(data)
 
-      // Update the score based on the response from the server
-      setScore(data.score);
+      // Update the score cumulatively
+      setScore((prevScore) => prevScore + newScore);
 
       // Check if the updated score is 10000 and set the flag if it is
       if (data.score === 10000) {
@@ -61,6 +50,19 @@ export default function Page() {
       console.error('Error updating score:', error);
     }
   };
+
+  useEffect(() => {
+    fetch('/api/score') // Fetch score from Next.js API route
+      .then((response) => response.json())
+      .then((data) => {
+        setScore(data.score);
+        // Check if the score is 10000 and set the flag if it is
+        if (data.score === 10000) {
+          setFlag("FLAG{your_flag_here}"); // Replace with actual flag
+        }
+      })
+      .catch((error) => console.error('Error fetching score:', error));
+  }, [updateScore]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -84,7 +86,7 @@ export default function Page() {
           Increment by 15
         </button>
         <button onClick={() => updateScore(10000)} className="bg-blue-500 text-white px-4 py-2 rounded ml-2">
-          Set Score to 10000
+          Increment by 
         </button>
       </div>
       {flag && <p className="mt-4 text-green-600 font-bold">{flag}</p>} {/* Display flag if it exists */}
