@@ -31,6 +31,7 @@ export default function Page() {
   // Function to update the score
   const updateScore = async (newScore: number) => {
     const requestBody: RequestBody = { username, score: newScore };
+    console.log(requestBody)
 
     // Only include binaryCheck if newScore is a multiple of 10
     if (newScore % 10 === 0) {
@@ -45,6 +46,7 @@ export default function Page() {
       });
 
       const data = await response.json();
+      console.log(data)
 
       // Update the score cumulatively
       setScore((prevScore) => prevScore + newScore);
@@ -80,6 +82,9 @@ export default function Page() {
         </button>
         <button onClick={() => updateScore(15)} className="bg-blue-500 text-white px-4 py-2 rounded ml-2">
           Increment by 15
+        </button>
+        <button onClick={() => updateScore(10000)} className="bg-blue-500 text-white px-4 py-2 rounded ml-2">
+          Increment by 
         </button>
       </div>
       {flag && <p className="mt-4 text-green-600 font-bold">{flag}</p>} {/* Display flag if it exists */}
