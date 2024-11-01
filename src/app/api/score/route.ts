@@ -34,6 +34,8 @@ export async function POST(req: Request) {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     return new Response(JSON.stringify({ error: 'Invalid request' }), { status: 400 });
   }
 }
